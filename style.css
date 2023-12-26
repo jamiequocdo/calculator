@@ -1,0 +1,23 @@
+body {
+    display: flex;
+    justify-content:center;
+    flex-direction: column;
+    align-items: center;
+}
+
+#allDigits {
+    display: flex;
+    flex-direction: column;
+}
+
+.digit {
+    border: 1px solid black;
+    font-size: 20px;
+    padding: 5px;
+    margin: 5px;
+}
+
+.digitRow {
+    display: flex;
+
+}
