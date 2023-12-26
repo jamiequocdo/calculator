@@ -20,9 +20,9 @@ function operate(operator) {
     }
 }
 
-let firstNumber = +numberOne;
+let firstNumber = 0;
 let operator = "operator";
-let secondNumber = +numberTwo;
+let secondNumber = 0;
 
 function operate() {
     if (operator === "+") {
@@ -38,7 +38,8 @@ function operate() {
     }
 }
 
-console.log(addNumbers(3, 3));
-console.log(subtractNumbers(10, 5));
-console.log(multiplyNumbers(3, 3));
-console.log(divideNumbers(50, 5));
+const buttonOne = document.querySelector("#one")
+buttonOne.addEventListener("click", () => {
+    console.log(typeof +buttonOne.textContent);
+})
+console.log(buttonOne);

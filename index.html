@@ -8,39 +8,41 @@
     </head>
 
     <body>
-        <header>Calculator</header>
-        <div id="display"></div>
-        <div id="operatorRow">
-            <div id="operatorRowOne">
-                <p id="add" class="operator">+</p>
-                <p id="subtract" class="operator">-</p>
+        <content>
+            <header>Calculator</header>
+            <div id="display"></div>
+            <div id="operatorRow">
+                <div id="operatorRowOne" class="operatorRow">
+                    <p id="add" class="operator">+</p>
+                    <p id="subtract" class="operator">-</p>
+                </div>
+                <div id="operatorRowTwo" class="operatorRow">
+                    <p id="multiply" class="operator">*</p>
+                    <p id="divide" class="operator">/</p>
+                </div>
+                <div id="operatorRowThree" class="operatorRow">
+                    <p id="equal" class="operator">=</p>
+                    <p id="clear" class="operator">CLEAR</p>
+                </div>
             </div>
-            <div id="operatorRowTwo">
-                <p id="multiply" class="operator">*</p>
-                <p id="divide" class="operator">/</p>
+            <div id="allDigits">
+                <div id="firstRow" class="digitRow">
+                    <p id="one" class="digit">1</p>
+                    <p id="two" class="digit">2</p>
+                    <p id="three" class="digit">3</p>
+                </div>
+                <div id="secondRow" class="digitRow">
+                    <p id="four" class="digit">4</p>
+                    <p id="five" class="digit">5</p>
+                    <p id="six" class="digit">6</p>
+                </div>
+                <div id="thirdRow" class="digitRow">
+                    <p id="seven" class="digit">7</p>
+                    <p id="eight" class="digit">8</p>
+                    <p id="nine" class="digit">9</p>
+                </div>
             </div>
-            <div id="operatorRowThree">
-                <p id="equal" class="operator">=</p>
-                <p id="clear" class="operator">CLEAR</p>
-            </div>
-        </div>
-        <div id="allDigits">
-            <div id="firstRow" class="digitRow">
-                <p id="one" class="digit">1</p>
-                <p id="two" class="digit">2</p>
-                <p id="three" class="digit">3</p>
-            </div>
-            <div id="secondRow" class="digitRow">
-                <p id="four" class="digit">4</p>
-                <p id="five" class="digit">5</p>
-                <p id="six" class="digit">6</p>
-            </div>
-            <div id="thirdRow" class="digitRow">
-                <p id="seven" class="digit">7</p>
-                <p id="eight" class="digit">8</p>
-                <p id="nine" class="digit">9</p>
-            </div>
-        </div>
+        </content>
         <script src="script.js"></script>
         
     </body>
