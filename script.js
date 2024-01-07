@@ -14,32 +14,69 @@ function divideNumbers(a, b) {
     return a / b;
 }
 
-function operate(operator) {
-    if (operator === "+") {
-        addNumbers(a, b)
-    }
-}
-
-let firstNumber = 0;
-let operator = "operator";
+let firstNumber
+let operatorType = "operator";
 let secondNumber = 0;
 
 function operate() {
-    if (operator === "+") {
-        addNumbers(firstNumber, secondNumber);
-    } else if (operator === "-") {
-        subtractNumbers(firstNumber, secondNumber);
-    } else if (operator === "*") {
-        multiplyNumbers(firstNumber,secondNumber);
-    } else if (operator === "/") {
-        divideNumbers(firstNumber, secondNumber);
+    if (operatorType === "+") {
+        return addNumbers(firstNumber, secondNumber);
+    } else if (operatorType === "-") {
+        return subtractNumbers(firstNumber, secondNumber);
+    } else if (operatorType === "*") {
+        return multiplyNumbers(firstNumber,secondNumber);
+    } else if (operatorType === "/") {
+        return divideNumbers(firstNumber, secondNumber);
     } else {
         console.log("Incorrect Input");
     }
 }
 
-const buttonOne = document.querySelector("#one")
-buttonOne.addEventListener("click", () => {
-    console.log(typeof +buttonOne.textContent);
+const buttonDigits = document.querySelectorAll(".digit")
+const display = document.querySelector("#display");
+
+let displayArray = [];
+
+buttonDigits.forEach(button => {
+    button.addEventListener("click", () => {
+        displayArray.push(+button.textContent);
+        let string = displayArray.join("")
+        display.textContent = +string;
+    })
+});
+
+
+//This button clears the display element and displayArray.  Restarting the use of the calculator.
+const clearButton = document.querySelector("#clear");
+clearButton.addEventListener("click", () => {
+    display.textContent = "";
+    displayArray.splice(0, displayArray.length);
+    firstNumber
+    secondNumber
 })
-console.log(buttonOne);
+
+//Clicking "add" button copies displayArray to firstNumber;
+//TODO Make the Add button work
+const addButton = document.querySelector("#add");
+addButton.addEventListener("click", () => {
+    operatorType = "+";
+    lookForNumbers();
+})
+
+const equalButton = document.querySelector("#equal");
+equalButton.addEventListener("click", () => {
+    secondNumber = +displayArray.join("");
+    display.textContent = operate();
+    
+})
+
+function lookForNumbers() {
+    if (firstNumber !== undefined && firstNumber !== null) {
+        secondNumber = +displayArray.join("")
+        displayArray = [];
+    } else {
+        firstNumber = +displayArray.join("")
+        displayArray = [];
+    }
+
+}
