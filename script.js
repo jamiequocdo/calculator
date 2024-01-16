@@ -1,47 +1,40 @@
-function addNumbers(a, b) {
-    return a + b;
+//TODO Fix Bug: Calculation uses most recent clicked operator instead of previous when doing calcs like 11 + 11 + 11 -
+// answer would be 11
+
+
+const calculator = {
+    firstNumber: null,
+    secondNumber: null,
+    operatorType: "",
 }
 
-function subtractNumbers(a, b) {
-    return a - b;
-}
-
-function multiplyNumbers(a, b) {
-    return a * b;
-}
-
-function divideNumbers(a, b) {
-    return a / b;
-}
-
-let firstNumber
-let operatorType = "operator";
-let secondNumber = 0;
-
-function operate() {
-    if (operatorType === "+") {
-        return addNumbers(firstNumber, secondNumber);
-    } else if (operatorType === "-") {
-        return subtractNumbers(firstNumber, secondNumber);
-    } else if (operatorType === "*") {
-        return multiplyNumbers(firstNumber,secondNumber);
-    } else if (operatorType === "/") {
-        return divideNumbers(firstNumber, secondNumber);
-    } else {
-        console.log("Incorrect Input");
+//Switch Statement.  Easier to read than if/else statement.
+function operate(a, b, operator) {
+    switch (operator) {
+        case "+":
+            return a + b;
+        case "-":
+            return a - b;
+        case "*":
+            return a * b;
+        case "/":
+            //Must make Error message for dealing with dividing by Zero
+            return b !== 0 ? a / b : "Error";
+            //Default switch statement to handle incorrect input
+        default:
+            console.log("incorrect Input");
+            return null;
     }
 }
 
-const buttonDigits = document.querySelectorAll(".digit")
+const buttonDigits = document.querySelectorAll(".digit");
 const display = document.querySelector("#display");
-
 let displayArray = [];
 
 buttonDigits.forEach(button => {
     button.addEventListener("click", () => {
         displayArray.push(+button.textContent);
-        let string = displayArray.join("")
-        display.textContent = +string;
+        updateDisplay();
     })
 });
 
@@ -49,34 +42,80 @@ buttonDigits.forEach(button => {
 //This button clears the display element and displayArray.  Restarting the use of the calculator.
 const clearButton = document.querySelector("#clear");
 clearButton.addEventListener("click", () => {
-    display.textContent = "";
-    displayArray.splice(0, displayArray.length);
-    firstNumber
-    secondNumber
+    clearCalculator();
 })
-
-//Clicking "add" button copies displayArray to firstNumber;
-//TODO Make the Add button work
-const addButton = document.querySelector("#add");
-addButton.addEventListener("click", () => {
-    operatorType = "+";
-    lookForNumbers();
+/*
+    This eventListener affects +, -, /, * buttons.  Variable operatorType becomes gains value 
+    of the button that is pressed.
+*/
+let operatorButtons = document.querySelectorAll(".operator");
+operatorButtons.forEach(button => {
+    button.addEventListener("click", () => {
+        handleOperatorClick(button.textContent);
+    })
 })
 
 const equalButton = document.querySelector("#equal");
 equalButton.addEventListener("click", () => {
-    secondNumber = +displayArray.join("");
-    display.textContent = operate();
-    
+    calculator.secondNumber = +displayArray.join("");
+    calculateResult();
 })
 
+/*
+    This function finds if Variable firstNumber has any value other than "".
+*/
 function lookForNumbers() {
-    if (firstNumber !== undefined && firstNumber !== null) {
-        secondNumber = +displayArray.join("")
+    //If firstNumber has value, give secondNumber value of displayArray but in datatype: number, and array joined together
+    if (calculator.firstNumber !== null) {
+        calculator.secondNumber = +displayArray.join("");
         displayArray = [];
     } else {
-        firstNumber = +displayArray.join("")
+        calculator.firstNumber = +displayArray.join("");
         displayArray = [];
     }
+}
 
+function handleOperatorClick(operator) {
+    lookForNumbers();
+    calculator.operatorType = operator;
+    calculateResult();
+    display.textContent = calculator.firstNumber;
+}
+
+function calculateResult() {
+    let result = operate(
+        calculator.firstNumber,
+        calculator.secondNumber,
+        calculator.operatorType,
+    )
+    display.textContent = result;
+    calculator.firstNumber = result;
+    calculator.secondNumber = null;
+    displayArray = [];
+}
+
+function clearCalculator() {
+    display.textContent = "";
+    displayArray = [];
+    calculator.firstNumber = null;
+    calculator.secondNumber = null;
+    calculator.operatorType = "";
+}
+
+function updateDisplay() {
+    let string = displayArray.join("");
+    display.textContent = +string;
+}
+
+function calculateResult() {
+    // calculator.secondNumber = +displayArray.join("");
+    let result = operate(
+        calculator.firstNumber,
+        calculator.secondNumber,
+        calculator.operatorType,
+    );
+    display.textContent = result;
+    calculator.firstNumber = result;
+    calculator.secondNumber = null;
+    // displayArray = [];
 }

@@ -22,7 +22,9 @@ body {
 
 }
 
-.operator {
+.operator,
+#equal,
+#clear {
     border: 1px solid black;
     padding: 15px;
 }
@@ -41,5 +43,6 @@ body {
 
 .digitRow {
     display: flex;
+    justify-content: center;
 
 }
