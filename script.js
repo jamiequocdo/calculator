@@ -1,7 +1,3 @@
-//TODO Fix Bug: Calculation uses most recent clicked operator instead of previous when doing calcs like 11 + 11 + 11 -
-// answer would be 11
-
-
 const calculator = {
     firstNumber: null,
     secondNumber: null,
@@ -77,8 +73,12 @@ function lookForNumbers() {
 
 function handleOperatorClick(operator) {
     lookForNumbers();
+    // calculator.operatorType = operator;
+    if (calculator.secondNumber !== null) {
+        calculateResult();
+    }
+    
     calculator.operatorType = operator;
-    calculateResult();
     display.textContent = calculator.firstNumber;
 }
 
