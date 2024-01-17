@@ -1,3 +1,5 @@
+
+
 const calculator = {
     firstNumber: null,
     secondNumber: null,
@@ -55,6 +57,7 @@ const equalButton = document.querySelector("#equal");
 equalButton.addEventListener("click", () => {
     calculator.secondNumber = +displayArray.join("");
     calculateResult();
+    operatorType = "";
 })
 
 /*
@@ -73,7 +76,6 @@ function lookForNumbers() {
 
 function handleOperatorClick(operator) {
     lookForNumbers();
-    // calculator.operatorType = operator;
     if (calculator.secondNumber !== null) {
         calculateResult();
     }
@@ -107,15 +109,15 @@ function updateDisplay() {
     display.textContent = +string;
 }
 
-function calculateResult() {
-    // calculator.secondNumber = +displayArray.join("");
-    let result = operate(
-        calculator.firstNumber,
-        calculator.secondNumber,
-        calculator.operatorType,
-    );
-    display.textContent = result;
-    calculator.firstNumber = result;
-    calculator.secondNumber = null;
-    // displayArray = [];
-}
+// function calculateResult() {
+//     // calculator.secondNumber = +displayArray.join("");
+//     let result = operate(
+//         calculator.firstNumber,
+//         calculator.secondNumber,
+//         calculator.operatorType,
+//     );
+//     display.textContent = result;
+//     calculator.firstNumber = result;
+//     calculator.secondNumber = null;
+//     // displayArray = [];
+// }
