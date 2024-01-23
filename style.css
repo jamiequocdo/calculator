@@ -1,3 +1,5 @@
+/* Make it so that the digit class is all the same height and width */
+
 html, 
 body {
     height: 100%;
@@ -23,7 +25,6 @@ body {
 }
 
 .operator,
-#equal,
 #clear {
     border: 1px solid black;
     padding: 15px;
@@ -39,6 +40,8 @@ body {
     font-size: 20px;
     padding: 20px;
     margin: 5px;
+    min-height: 40;
+    min-width: 60;
 }
 
 .digitRow {
