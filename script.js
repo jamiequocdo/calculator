@@ -1,5 +1,3 @@
-//TODO figure out why i can't do Equals
-
 const calculator = {
     firstNumber: null,
     secondNumber: null,

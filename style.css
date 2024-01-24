@@ -16,6 +16,7 @@ body {
 
 #digits-operators {
     display: flex;
+    flex-direction: row;
 }
 
 #clear {
