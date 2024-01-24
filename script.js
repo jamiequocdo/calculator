@@ -1,4 +1,4 @@
-
+//TODO figure out why i can't do Equals
 
 const calculator = {
     firstNumber: null,
@@ -55,7 +55,10 @@ operatorButtons.forEach(button => {
 
 const equalButton = document.querySelector("#equal");
 equalButton.addEventListener("click", () => {
+    console.log(calculator.secondNumber);
+    console.log(displayArray);
     calculator.secondNumber = +displayArray.join("");
+    console.log(calculator.secondNumber);
     calculateResult();
     operatorType = "";
 })
