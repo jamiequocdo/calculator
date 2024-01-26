@@ -1,3 +1,5 @@
+//TODO Make it so that if calculator.secondNumber has no number, equal sign will not work.  it will just show calculator.firstNumber
+
 const calculator = {
     firstNumber: null,
     secondNumber: null,
@@ -26,13 +28,24 @@ function operate(a, b, operator) {
 const buttonDigits = document.querySelectorAll(".digit");
 const display = document.querySelector("#display");
 let displayArray = [];
-
 buttonDigits.forEach(button => {
     button.addEventListener("click", () => {
-        displayArray.push(+button.textContent);
+        displayArray.push(button.textContent);
         updateDisplay();
     })
 });
+
+const decimalPoint = document.querySelector("#decimal");
+decimalPoint.addEventListener("click", () => {
+    let hasDecimal = displayArray.includes(".");
+    if (hasDecimal === true) {
+        return
+    } else {
+        displayArray.push(decimalPoint.textContent);
+        updateDisplay();
+    }
+})
+
 
 
 //This button clears the display element and displayArray.  Restarting the use of the calculator.
@@ -107,7 +120,7 @@ function clearCalculator() {
 
 function updateDisplay() {
     let string = displayArray.join("");
-    display.textContent = +string;
+    display.textContent = string;
 }
 
 // function calculateResult() {
