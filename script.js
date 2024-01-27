@@ -1,4 +1,4 @@
-//TODO Make it so that if calculator.secondNumber has no number, equal sign will not work.  it will just show calculator.firstNumber
+
 
 const calculator = {
     firstNumber: null,
@@ -25,9 +25,20 @@ function operate(a, b, operator) {
     }
 }
 
-const buttonDigits = document.querySelectorAll(".digit");
+//TOP DISPLAY of numbers being entered into calculator
 const display = document.querySelector("#display");
+
+const backspace = document.querySelector("#backspace");
+backspace.addEventListener("click", () => {
+    displayArray.pop();
+    updateDisplay();
+})
+
+//Array that remembers all numbers pressed before an operator is pressed
 let displayArray = [];
+
+//Block allowing numbers to populate "displayArray" and "display" variables
+const buttonDigits = document.querySelectorAll(".digit");
 buttonDigits.forEach(button => {
     button.addEventListener("click", () => {
         displayArray.push(button.textContent);
@@ -35,6 +46,7 @@ buttonDigits.forEach(button => {
     })
 });
 
+//Block for decimal to be used.  Restricting only 1 decimal in a number
 const decimalPoint = document.querySelector("#decimal");
 decimalPoint.addEventListener("click", () => {
     let hasDecimal = displayArray.includes(".");
@@ -48,7 +60,7 @@ decimalPoint.addEventListener("click", () => {
 
 
 
-//This button clears the display element and displayArray.  Restarting the use of the calculator.
+//Clears "display" element and "displayArray" variable.  Erasing all info on calculator
 const clearButton = document.querySelector("#clear");
 clearButton.addEventListener("click", () => {
     clearCalculator();
@@ -64,19 +76,21 @@ operatorButtons.forEach(button => {
     })
 })
 
+// Calculates values of calculator.firstNumber & calculator.secondNumber.  First, checks if there is anything in 
+// calculator.operatorType.  If nothing, it will do nothing
 const equalButton = document.querySelector("#equal");
 equalButton.addEventListener("click", () => {
-    console.log(calculator.secondNumber);
-    console.log(displayArray);
-    calculator.secondNumber = +displayArray.join("");
-    console.log(calculator.secondNumber);
-    calculateResult();
-    operatorType = "";
+    if (calculator.operatorType === "") {
+        return;
+    } else {
+        calculator.secondNumber = +displayArray.join("");
+        calculateResult();
+        calculator.operatorType = "";
+    }
+    
 })
 
-/*
-    This function finds if Variable firstNumber has any value other than "".
-*/
+// This function finds if Variable firstNumber has any value other than "".
 function lookForNumbers() {
     //If firstNumber has value, give secondNumber value of displayArray but in datatype: number, and array joined together
     if (calculator.firstNumber !== null) {
@@ -88,6 +102,7 @@ function lookForNumbers() {
     }
 }
 
+//A Function used with operatorButtons variable.  Calculates when there is calculator.secondNumber and another operator is pressed
 function handleOperatorClick(operator) {
     lookForNumbers();
     if (calculator.secondNumber !== null) {
@@ -98,6 +113,8 @@ function handleOperatorClick(operator) {
     display.textContent = calculator.firstNumber;
 }
 
+//Function creates object "result" that has function "operate(a, b, operator)".  Uses that info to update
+// "display"
 function calculateResult() {
     let result = operate(
         calculator.firstNumber,
@@ -110,6 +127,7 @@ function calculateResult() {
     displayArray = [];
 }
 
+//Function used in clearButton element to erase all info.
 function clearCalculator() {
     display.textContent = "";
     displayArray = [];
@@ -118,20 +136,8 @@ function clearCalculator() {
     calculator.operatorType = "";
 }
 
+//Function to join displayArray and adds it as value to variable "string". Uses that to 
 function updateDisplay() {
     let string = displayArray.join("");
     display.textContent = string;
 }
-
-// function calculateResult() {
-//     // calculator.secondNumber = +displayArray.join("");
-//     let result = operate(
-//         calculator.firstNumber,
-//         calculator.secondNumber,
-//         calculator.operatorType,
-//     );
-//     display.textContent = result;
-//     calculator.firstNumber = result;
-//     calculator.secondNumber = null;
-//     // displayArray = [];
-// }
