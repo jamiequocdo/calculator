@@ -1,4 +1,5 @@
-
+//TODO Add keyboard functionality to all of the buttons
+//TODO Prevent the display from growing larger to fit all the numbers.
 
 const calculator = {
     firstNumber: null,
@@ -6,6 +7,21 @@ const calculator = {
     operatorType: "",
 }
 
+document.addEventListener("keydown", (event) => {
+    if (/^\d$/.test(event.key)) {
+        displayArray.push(+event.key)
+        updateDisplay();
+    } else if (["+", "-", "*", "/"].includes(event.key)) {
+        handleOperatorClick(event.key); 
+    } else if (event.key === "=") {
+        equalCalculate();
+    } else if (event.key === "Backspace") {
+        deleteOneNumber();
+    } else if (event.key === "Escape") {
+        clearCalculator();
+    }
+}
+)
 //Switch Statement.  Easier to read than if/else statement.
 function operate(a, b, operator) {
     switch (operator) {
@@ -30,9 +46,13 @@ const display = document.querySelector("#display");
 
 const backspace = document.querySelector("#backspace");
 backspace.addEventListener("click", () => {
+    deleteOneNumber();
+})
+
+function deleteOneNumber() {
     displayArray.pop();
     updateDisplay();
-})
+}
 
 //Array that remembers all numbers pressed before an operator is pressed
 let displayArray = [];
@@ -80,14 +100,7 @@ operatorButtons.forEach(button => {
 // calculator.operatorType.  If nothing, it will do nothing
 const equalButton = document.querySelector("#equal");
 equalButton.addEventListener("click", () => {
-    if (calculator.operatorType === "") {
-        return;
-    } else {
-        calculator.secondNumber = +displayArray.join("");
-        calculateResult();
-        calculator.operatorType = "";
-    }
-    
+    equalCalculate(); 
 })
 
 // This function finds if Variable firstNumber has any value other than "".
@@ -127,6 +140,16 @@ function calculateResult() {
     displayArray = [];
 }
 
+function equalCalculate() {
+    if (calculator.operatorType === "") {
+        return;
+    } else {
+        calculator.secondNumber = +displayArray.join("");
+        calculateResult();
+        calculator.operatorType = "";
+    }
+}
+
 //Function used in clearButton element to erase all info.
 function clearCalculator() {
     display.textContent = "";
@@ -141,3 +164,5 @@ function updateDisplay() {
     let string = displayArray.join("");
     display.textContent = string;
 }
+
+document
