@@ -1,6 +1,5 @@
 //TODO Add keyboard functionality to all of the buttons
 //TODO Do not allow backspace after the equal sign has been pressed
-//TODO When typing Zero (0) first, I want it so that the next number will take its place
 //TODO When typing Decimal (.) first, I want it so that it shows up as "0." on the display
 //TODO Put a button where I can change a number into a negative number
 
@@ -64,13 +63,6 @@ const buttonDigits = document.querySelectorAll(".digit");
 buttonDigits.forEach(button => {
     button.addEventListener("click", () => {
         addDigits(button.textContent);
-        // if (displayArray.length < 20) {
-        //     displayArray.push(button.textContent);
-        //     updateDisplay();
-        // } else {
-        //     return
-        // }
-        
     })
 });
 
@@ -80,12 +72,19 @@ If Yes, adds number that's pressed to displayArray.
 If No, ignores pressed number and doesn't do anything
 */ 
 function addDigits(number) {
+    if(displayArray.indexOf(0, 0) === 0) {
+        displayArray.pop();
+    }
     if (displayArray.length < 19) {
         displayArray.push(number);
         updateDisplay();
     } else {
         return
     }
+}
+
+if(displayArray.indexOf("0", 0) === 0) {
+    displayArray.pop();
 }
 
 //Block for decimal to be used.  Restricting only 1 decimal in a number
