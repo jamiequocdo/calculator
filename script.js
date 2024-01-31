@@ -1,5 +1,8 @@
 //TODO Add keyboard functionality to all of the buttons
-//TODO Prevent the display from growing larger to fit all the numbers.
+//TODO Do not allow backspace after the equal sign has been pressed
+//TODO When typing Zero (0) first, I want it so that the next number will take its place
+//TODO When typing Decimal (.) first, I want it so that it shows up as "0." on the display
+//TODO Put a button where I can change a number into a negative number
 
 const calculator = {
     firstNumber: null,
@@ -9,8 +12,7 @@ const calculator = {
 
 document.addEventListener("keydown", (event) => {
     if (/^\d$/.test(event.key)) {
-        displayArray.push(+event.key)
-        updateDisplay();
+        addDigits(+event.key);
     } else if (["+", "-", "*", "/"].includes(event.key)) {
         handleOperatorClick(event.key); 
     } else if (event.key === "=") {
@@ -61,10 +63,30 @@ let displayArray = [];
 const buttonDigits = document.querySelectorAll(".digit");
 buttonDigits.forEach(button => {
     button.addEventListener("click", () => {
-        displayArray.push(button.textContent);
-        updateDisplay();
+        addDigits(button.textContent);
+        // if (displayArray.length < 20) {
+        //     displayArray.push(button.textContent);
+        //     updateDisplay();
+        // } else {
+        //     return
+        // }
+        
     })
 });
+
+/* 
+Used for buttonDigits and "keydown" eventListener.  Checks if "displayArray" array is less than 20 items.
+If Yes, adds number that's pressed to displayArray.
+If No, ignores pressed number and doesn't do anything
+*/ 
+function addDigits(number) {
+    if (displayArray.length < 19) {
+        displayArray.push(number);
+        updateDisplay();
+    } else {
+        return
+    }
+}
 
 //Block for decimal to be used.  Restricting only 1 decimal in a number
 const decimalPoint = document.querySelector("#decimal");
@@ -164,5 +186,3 @@ function updateDisplay() {
     let string = displayArray.join("");
     display.textContent = string;
 }
-
-document
