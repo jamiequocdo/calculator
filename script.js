@@ -1,6 +1,5 @@
-//TODO Add keyboard functionality to all of the buttons
+//TODO After pressing the equal sign. If I press the decimal sign, it erases everything.
 //TODO Do not allow backspace after the equal sign has been pressed
-//TODO When typing Decimal (.) first, I want it so that it shows up as "0." on the display
 //TODO Put a button where I can change a number into a negative number
 
 const calculator = {
@@ -20,6 +19,8 @@ document.addEventListener("keydown", (event) => {
         deleteOneNumber();
     } else if (event.key === "Escape") {
         clearCalculator();
+    } else if (event.key === "." ) {
+        checkIfDecimal();
     }
 }
 )
@@ -90,16 +91,25 @@ if(displayArray.indexOf("0", 0) === 0) {
 //Block for decimal to be used.  Restricting only 1 decimal in a number
 const decimalPoint = document.querySelector("#decimal");
 decimalPoint.addEventListener("click", () => {
+    checkIfDecimal();
+})
+
+function checkIfDecimal () {
     let hasDecimal = displayArray.includes(".");
+    console.log(hasDecimal);
     if (hasDecimal === true) {
         return
     } else {
-        displayArray.push(decimalPoint.textContent);
-        updateDisplay();
+        if (/\d/.test(display.textContent) === false) {
+            displayArray.push("0");
+            displayArray.push(".");
+            updateDisplay();
+        } else {
+            displayArray.push(".");
+            updateDisplay();
+        }
     }
-})
-
-
+}
 
 //Clears "display" element and "displayArray" variable.  Erasing all info on calculator
 const clearButton = document.querySelector("#clear");
