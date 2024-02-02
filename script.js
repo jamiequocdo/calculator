@@ -97,7 +97,7 @@ decimalPoint.addEventListener("click", () => {
 function checkIfDecimal () {
     let hasDecimal = displayArray.includes(".");
     console.log(hasDecimal);
-    if (hasDecimal === true) {
+    if (hasDecimal === true  || calculator.operatorType === "=") {
         return
     } else {
         if (/\d/.test(display.textContent) === false) {
@@ -177,7 +177,7 @@ function equalCalculate() {
     } else {
         calculator.secondNumber = +displayArray.join("");
         calculateResult();
-        calculator.operatorType = "";
+        calculator.operatorType = "=";
     }
 }
 
