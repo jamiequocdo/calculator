@@ -1,6 +1,4 @@
-//TODO Do not allow backspace after the equal sign has been pressed
 //TODO Put a button where I can change a number into a negative number
-//TODO I don't want the display to be erased when I press the equal sign multiple times
 
 const calculator = {
     firstNumber: null,
@@ -10,13 +8,17 @@ const calculator = {
 
 document.addEventListener("keydown", (event) => {
     if (/^\d$/.test(event.key)) {
-        addDigits(+event.key);
+        if (calculator.operatorType === "=") {
+            return
+        } else {
+            addDigits(+event.key);
+        };
     } else if (["+", "-", "*", "/"].includes(event.key)) {
         handleOperatorClick(event.key); 
     } else if (event.key === "=") {
         equalCalculate();
     } else if (event.key === "Backspace") {
-        deleteOneNumber();
+        noEqualBackspace();
     } else if (event.key === "Escape") {
         clearCalculator();
     } else if (event.key === "." ) {
@@ -48,8 +50,16 @@ const display = document.querySelector("#display");
 
 const backspace = document.querySelector("#backspace");
 backspace.addEventListener("click", () => {
-    deleteOneNumber();
+    noEqualBackspace();
 })
+
+function noEqualBackspace() {
+    if (calculator.operatorType === "=") {
+        return
+    } else {
+        deleteOneNumber();
+    }
+}
 
 function deleteOneNumber() {
     displayArray.pop();
@@ -63,7 +73,12 @@ let displayArray = [];
 const buttonDigits = document.querySelectorAll(".digit");
 buttonDigits.forEach(button => {
     button.addEventListener("click", () => {
-        addDigits(button.textContent);
+        if (calculator.operatorType === "=") {
+            return
+        } else {
+            addDigits(button.textContent);
+        }
+        
     })
 });
 
