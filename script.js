@@ -1,6 +1,6 @@
-//TODO After pressing the equal sign. If I press the decimal sign, it erases everything.
 //TODO Do not allow backspace after the equal sign has been pressed
 //TODO Put a button where I can change a number into a negative number
+//TODO I don't want the display to be erased when I press the equal sign multiple times
 
 const calculator = {
     firstNumber: null,
@@ -73,6 +73,7 @@ If Yes, adds number that's pressed to displayArray.
 If No, ignores pressed number and doesn't do anything
 */ 
 function addDigits(number) {
+
     if(displayArray.indexOf(0, 0) === 0) {
         displayArray.pop();
     }
@@ -97,10 +98,10 @@ decimalPoint.addEventListener("click", () => {
 function checkIfDecimal () {
     let hasDecimal = displayArray.includes(".");
     console.log(hasDecimal);
-    if (hasDecimal === true  || calculator.operatorType === "=") {
+    if (hasDecimal === true) {
         return
     } else {
-        if (/\d/.test(display.textContent) === false) {
+        if (calculator.operatorType === "=" || /\d/.test(display.textContent) === false ) {
             displayArray.push("0");
             displayArray.push(".");
             updateDisplay();
@@ -148,11 +149,16 @@ function lookForNumbers() {
 
 //A Function used with operatorButtons variable.  Calculates when there is calculator.secondNumber and another operator is pressed
 function handleOperatorClick(operator) {
-    lookForNumbers();
+    if (calculator.operatorType === "=") {
+        calculator.operatorType = operator;
+        lookForNumbers();
+    } else {
+       lookForNumbers();
     if (calculator.secondNumber !== null) {
         calculateResult();
+    } 
     }
-    
+
     calculator.operatorType = operator;
     display.textContent = calculator.firstNumber;
 }
@@ -168,13 +174,15 @@ function calculateResult() {
     display.textContent = result;
     calculator.firstNumber = result;
     calculator.secondNumber = null;
-    displayArray = [];
+    displayArray = [result];
 }
 
 function equalCalculate() {
     if (calculator.operatorType === "") {
         return;
-    } else {
+    } else if (calculator.operatorType === "=") {
+        return
+    }   else {
         calculator.secondNumber = +displayArray.join("");
         calculateResult();
         calculator.operatorType = "=";
