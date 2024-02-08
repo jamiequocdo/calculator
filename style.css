@@ -1,3 +1,7 @@
+/* TODO miscButtons is slightly smaller than the rest of content.  Try and fix that. */
+/* TODO Add color to the buttons */
+/* TODO Add Animation to the buttons */
+
 html, 
 body {
     height: 100%;
@@ -5,6 +9,12 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+content {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
     
 
@@ -21,41 +31,55 @@ body {
 
 #digits-operators {
     display: flex;
-    flex-direction: row;
+    justify-content: space-between;
+    gap: 5px;
+}
+
+#miscButtons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
 }
 
 #clear,
-#backspace {
-    border: 1px solid black;
-    padding: 15px;
-    text-align: center;
+#backspace,
+#negative {
+    flex: 1;
+    margin: 0px;
 }
 
 #allDigits {
     display: flex;
     flex-direction: column;
+    gap: 5px;
 }
 
 .digit,
 .operator,
 #decimal,
-#equal {
+#equal,
+#clear,
+#backspace,
+#negative {
     border: 1px solid black;
     font-size: 20px;
     padding: 20px;
-    margin: 5px;
     min-height: 30px;
     min-width: 50px;
     text-align: center;
+    margin: 0px;
 }
 
 .digitRow {
     display: flex;
     justify-content: center;
+    gap: 5px;
 
 }
 
 #operatorRow {
     display: flex;
     flex-direction: column-reverse;
+    gap: 5px;
 }

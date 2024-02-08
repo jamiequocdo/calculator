@@ -1,5 +1,3 @@
-//TODO Put a button where I can change a number into a negative number
-
 const calculator = {
     firstNumber: null,
     secondNumber: null,
@@ -48,11 +46,13 @@ function operate(a, b, operator) {
 //TOP DISPLAY of numbers being entered into calculator
 const display = document.querySelector("#display");
 
+//Backspace button
 const backspace = document.querySelector("#backspace");
 backspace.addEventListener("click", () => {
     noEqualBackspace();
 })
 
+//Function to simplify the Backspace and make sure it doesn't activate when operatorType is "="
 function noEqualBackspace() {
     if (calculator.operatorType === "=") {
         return
@@ -61,6 +61,7 @@ function noEqualBackspace() {
     }
 }
 
+//Function used in noEqualBackspace() function to delete 1 number
 function deleteOneNumber() {
     displayArray.pop();
     updateDisplay();
@@ -110,6 +111,7 @@ decimalPoint.addEventListener("click", () => {
     checkIfDecimal();
 })
 
+//Function to check if display already has a decimal point or not.  If it does, it does nothing.
 function checkIfDecimal () {
     let hasDecimal = displayArray.includes(".");
     console.log(hasDecimal);
@@ -131,6 +133,12 @@ function checkIfDecimal () {
 const clearButton = document.querySelector("#clear");
 clearButton.addEventListener("click", () => {
     clearCalculator();
+})
+
+const negativeButton = document.querySelector("#negative");
+negativeButton.addEventListener("click", () => {
+    displayArray.unshift("-");
+    updateDisplay();
 })
 /*
     This eventListener affects +, -, /, * buttons.  Variable operatorType becomes gains value 
@@ -192,6 +200,7 @@ function calculateResult() {
     displayArray = [result];
 }
 
+//Calculates when equal button is pressed.  Does nothing if operatorType is "" or "=";
 function equalCalculate() {
     if (calculator.operatorType === "") {
         return;
