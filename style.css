@@ -1,5 +1,3 @@
-/* TODO miscButtons is slightly smaller than the rest of content.  Try and fix that. */
-/* TODO Add color to the buttons */
 /* TODO Add Animation to the buttons */
 
 html, 
@@ -23,8 +21,8 @@ content {
     justify-content: right;
     align-items: center;
     border: 1px solid black;
-    height: 50px;
-    font-size: 40px;
+    height: 72px;
+    font-size: 60px;
     max-width: 408px;
     overflow: hidden;
 }
@@ -37,7 +35,7 @@ content {
 
 #miscButtons {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     gap: 5px;
 }
@@ -82,4 +80,20 @@ content {
     display: flex;
     flex-direction: column-reverse;
     gap: 5px;
+}
+
+#equal {
+    background-color: lightblue;
+}
+
+.digit,
+#decimal {
+    background-color: rgb(247, 247, 247);
+}
+
+#clear,
+#negative,
+#backspace,
+.operator {
+    background-color: grey;
 }
