@@ -93,7 +93,7 @@ function addDigits(number) {
     if(displayArray.indexOf(0, 0) === 0) {
         displayArray.pop();
     }
-    if (displayArray.length < 19) {
+    if (displayArray.length < 12) {
         displayArray.push(number);
         updateDisplay();
     } else {
