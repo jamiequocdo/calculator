@@ -1,8 +1,12 @@
+// TODO Continue adding animation to buttons when the corresponding mouse button is pressed
+// TODO prevent NaN and Error from showing onto display if encountered
+
 const calculator = {
     firstNumber: null,
     secondNumber: null,
     operatorType: "",
 }
+
 
 document.addEventListener("keydown", (event) => {
     if (/^\d$/.test(event.key)) {
@@ -10,13 +14,14 @@ document.addEventListener("keydown", (event) => {
             return
         } else {
             addDigits(+event.key);
+            handleDigitKeyDown(event);
         };
     } else if (["+", "-", "*", "/"].includes(event.key)) {
         handleOperatorClick(event.key); 
     } else if (event.key === "=") {
         equalCalculate();
     } else if (event.key === "Backspace") {
-        noEqualBackspace();
+        noEqualBackspace();  
     } else if (event.key === "Escape") {
         clearCalculator();
     } else if (event.key === "." ) {
@@ -24,6 +29,35 @@ document.addEventListener("keydown", (event) => {
     }
 }
 )
+
+document.addEventListener("keyup", (event) => {
+    handleDigitKeyUp(event);
+    
+})
+
+function handleDigitKeyUp(event) {
+    const keyboard = event.key;
+
+    if (/^\d$/.test(keyboard)) {
+        let keyboardToButton = document.getElementById(keyboard);
+        if (keyboardToButton === null) {
+            return
+        }
+        keyboardToButton.style.backgroundColor = "";
+    } else {
+        return;
+    }
+}
+
+function handleDigitKeyDown(event) {
+    const keyboard = event.key;
+    let keyboardToButton = document.getElementById(keyboard);
+    if (keyboardToButton === null) {
+        return
+    } else {
+        keyboardToButton.style.backgroundColor = "pink";
+    }
+}
 //Switch Statement.  Easier to read than if/else statement.
 function operate(a, b, operator) {
     switch (operator) {
@@ -47,7 +81,7 @@ function operate(a, b, operator) {
 const display = document.querySelector("#display");
 
 //Backspace button
-const backspace = document.querySelector("#backspace");
+const backspace = document.querySelector("#Backspace");
 backspace.addEventListener("click", () => {
     noEqualBackspace();
 })
@@ -79,9 +113,9 @@ buttonDigits.forEach(button => {
         } else {
             addDigits(button.textContent);
         }
-        
     })
 });
+
 
 /* 
 Used for buttonDigits and "keydown" eventListener.  Checks if "displayArray" array is less than 20 items.
@@ -130,7 +164,7 @@ function checkIfDecimal () {
 }
 
 //Clears "display" element and "displayArray" variable.  Erasing all info on calculator
-const clearButton = document.querySelector("#clear");
+const clearButton = document.querySelector("#Escape");
 clearButton.addEventListener("click", () => {
     clearCalculator();
 })
@@ -236,3 +270,59 @@ function updateDisplay() {
     let string = displayArray.join("");
     display.textContent = string;
 }
+
+const test = document.getElementsByClassName("operator");
+// TODO Make CLEAR Button + Backspace button have animation or color change when pressed
+const escapeButton = document.getElementById("Escape");
+const BackspaceButton = document.getElementById("Backspace");
+
+document.addEventListener("keydown", (event) => {
+    for (i = 0; i < test.length; i++) {
+        if (test[i].innerHTML === event.key) {
+            test[i].style.backgroundColor = "red";
+        };
+    }
+})
+
+document.addEventListener("keyup", (event) => {
+    for (i = 0; i < test.length; i++) {
+        if (test[i].innerHTML === event.key) {
+            test[i].style.backgroundColor = "";
+        };
+    }
+})
+
+const backSpace = document.getElementById("Backspace");
+const resetButton = document.getElementById("Escape");
+
+animationChange(resetButton);
+animationChange(backSpace);
+
+function animationChange(element) {
+    const idString = element.id;
+
+    document.addEventListener("keydown", (event) => {
+        if (event.key === idString) {
+            element.style.backgroundColor = "red"
+        }
+    })
+
+    document.addEventListener("keyup", (event) => {
+        if (event.key === idString) {
+            element.style.backgroundColor = "";
+        }
+    })
+    
+}
+
+// document.addEventListener("keydown", (event) => {
+//     if (event.key === "Backspace") {
+//         backSpace.style.backgroundColor = "red"
+//     }
+// })
+
+// document.addEventListener("keyup", (event) => {
+//     if (event.key === "Backspace") {
+//         backSpace.style.backgroundColor = "";
+//     }
+// })
