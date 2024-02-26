@@ -41,9 +41,9 @@ content {
     gap: 5px;
 }
 
-#clear,
-#backspace,
-#negative {
+#Escape,
+#Backspace,
+#n {
     flex: 1;
     margin: 0px;
 }
@@ -56,11 +56,11 @@ content {
 
 .digit,
 .operator,
-#decimal,
-#equal,
+#\.,
+#\=,
 #Escape,
 #Backspace,
-#negative {
+#n {
     border: 1px solid black;
     font-size: 20px;
     padding: 20px;
@@ -93,19 +93,19 @@ content {
     gap: 5px;
 }
 
-#equal {
-    background-color: lightblue;
-}
-
 .digit,
-#decimal {
-    background-color: rgb(247, 247, 247);
+#\.,
+#\= {
+    background-color: var(--digit-color);
 }
 
 #Escape,
-#negative,
+#n,
 #Backspace,
 .operator {
     background-color: grey;
 }
 
+/* :root {
+    --digit-color: rgb(247, 247, 247);
+}; */

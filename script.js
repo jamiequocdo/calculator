@@ -1,6 +1,4 @@
-// TODO Continue adding animation to buttons when the corresponding mouse button is pressed
-// TODO prevent NaN and Error from showing onto display if encountered
-
+// TODO The id's for = & . are not valid id names.  Find another?
 const calculator = {
     firstNumber: null,
     secondNumber: null,
@@ -140,7 +138,7 @@ if(displayArray.indexOf("0", 0) === 0) {
 }
 
 //Block for decimal to be used.  Restricting only 1 decimal in a number
-const decimalPoint = document.querySelector("#decimal");
+const decimalPoint = document.querySelector("#\\.");
 decimalPoint.addEventListener("click", () => {
     checkIfDecimal();
 })
@@ -170,7 +168,7 @@ clearButton.addEventListener("click", () => {
 })
 
 //Makes the number on the display a negative number by adding "-" to the front of it
-const negativeButton = document.querySelector("#negative");
+const negativeButton = document.querySelector("#n");
 negativeButton.addEventListener("click", () => {
     let arrayHasNegative = displayArray.includes("-");
     if (arrayHasNegative === true) {
@@ -196,7 +194,7 @@ operatorButtons.forEach(button => {
 
 // Calculates values of calculator.firstNumber & calculator.secondNumber.  First, checks if there is anything in 
 // calculator.operatorType.  If nothing, it will do nothing
-const equalButton = document.querySelector("#equal");
+const equalButton = document.querySelector("#\\=");
 equalButton.addEventListener("click", () => {
     equalCalculate(); 
 })
@@ -294,9 +292,16 @@ document.addEventListener("keyup", (event) => {
 
 const backSpace = document.getElementById("Backspace");
 const resetButton = document.getElementById("Escape");
+const decimalButton = document.getElementById(".");
+const equalsButton = document.getElementById("="); 
+const negButton = document.getElementById("n")
+
 
 animationChange(resetButton);
 animationChange(backSpace);
+animationChange(decimalButton);
+animationChange(equalsButton);
+animationChange(negButton);
 
 function animationChange(element) {
     const idString = element.id;
@@ -314,15 +319,3 @@ function animationChange(element) {
     })
     
 }
-
-// document.addEventListener("keydown", (event) => {
-//     if (event.key === "Backspace") {
-//         backSpace.style.backgroundColor = "red"
-//     }
-// })
-
-// document.addEventListener("keyup", (event) => {
-//     if (event.key === "Backspace") {
-//         backSpace.style.backgroundColor = "";
-//     }
-// })
