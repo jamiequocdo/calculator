@@ -170,6 +170,26 @@ clearButton.addEventListener("click", () => {
 //Makes the number on the display a negative number by adding "-" to the front of it
 const negativeButton = document.querySelector("#n");
 negativeButton.addEventListener("click", () => {
+    negative();
+    // let arrayHasNegative = displayArray.includes("-");
+    // if (arrayHasNegative === true) {
+    //    let hasNeg = displayArray.findIndex(number => number === "-");
+    //    console.log(hasNeg);
+    //    displayArray.splice(hasNeg, 1);
+    //    updateDisplay();
+    // } else {
+    //     displayArray.unshift("-");
+    //     updateDisplay();
+    // }
+})
+
+document.addEventListener("keydown", (event) => {
+    if (event.key === "n") {
+        negative();
+    }
+})
+
+function negative() {
     let arrayHasNegative = displayArray.includes("-");
     if (arrayHasNegative === true) {
        let hasNeg = displayArray.findIndex(number => number === "-");
@@ -180,7 +200,7 @@ negativeButton.addEventListener("click", () => {
         displayArray.unshift("-");
         updateDisplay();
     }
-})
+}
 /*
     This eventListener affects +, -, /, * buttons.  Variable operatorType becomes gains value 
     of the button that is pressed.
